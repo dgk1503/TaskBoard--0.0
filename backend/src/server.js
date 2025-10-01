@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from "cors"
 import dotenv from 'dotenv'
+import path from "path"
 
 import router from './routes/notes.js'
 import { connectDB } from './config/db.js'
@@ -9,6 +10,7 @@ import rateLimiter from '../middleware/rateLimiter.js'
 dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 5001
+const __dirname = path.resolve()
 
 //middleware to parse JSON : req.body etc
 app.use(cors())
@@ -25,6 +27,7 @@ app.use(rateLimiter);
 
 
 app.use('/api/notes',router)
+app.use(express.static(path.join(__dirname,"../frontend/dist")))
 connectDB().then(() => {
 
     app.listen(PORT,() => {
