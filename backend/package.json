@@ -12,6 +12,7 @@
   "dependencies": {
     "@upstash/ratelimit": "^2.0.5",
     "@upstash/redis": "^1.34.9",
+    "codecamp-(mern)": "file:..",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^4.18.2",
