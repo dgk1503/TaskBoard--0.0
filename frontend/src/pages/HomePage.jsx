@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import api from '../lib/axios.js'
 import NoteCard from '../components/NoteCard.jsx'
-import Navbar from '../components/navbar.jsx'
+import Navbar from '../components/Navbar.jsx'
 import RateLimitedUI from '../components/RateLimitedUI.jsx'
 import NoteNotFound from '../components/NoteNotFound.jsx'
 
