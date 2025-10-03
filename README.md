@@ -1,6 +1,7 @@
 📋 TaskBoard
 
 A simple task management web application built with the MERN stack (MongoDB , Express.js , React , Node.js)
+![Image Alt](https://github.com/dgk1503/TaskBoard--0.0/blob/28f8ad6e7ae563ca054eaa2372bf535572ab56ce/frontend/taskboard_adv.png)
 
 🚀 Features
 
