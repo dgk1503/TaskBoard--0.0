@@ -12,10 +12,10 @@ A simple task management web application built with the MERN stack (MongoDB , Ex
 -Fully Responsive UI
 
 🛠️ Tech Stack
-Frontend: React, Tailwind CSS, DasiyUi , Lucide React
-Backend: Node.js, Express
-Database: MongoDB Atlas
-Deployment: Render (backend,frontend) 
+Frontend: React, Tailwind CSS, DasiyUi , Lucide React.
+Backend: Node.js, Express.
+Database: MongoDB Atlas.
+Deployment: Render (backend,frontend) .
 
 
 🤝 Contributing
