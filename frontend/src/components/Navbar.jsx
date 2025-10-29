@@ -3,8 +3,8 @@ import { FilePlus } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <header className="bg-transparent backdrop-blur-3xl border-b border-base-content/10 ">
-      <div className="mx-auto max-w-6xl p-4">
+    <header className="bg-transparent backdrop-blur-sm border-b border-base-content/10 ">
+      <div className="mx-auto max-w-6xl p-4 backdrop-blur-3xl">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl  font-mono font-bold text-primary tracking-tight ">
             TaskBoard
