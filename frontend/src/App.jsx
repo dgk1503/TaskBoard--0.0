@@ -5,6 +5,7 @@ import CreatePage from "./pages/CreatePage";
 import DetailsPage from "./pages/DetailsPage";
 
 import toast from "react-hot-toast";
+import Register from "./components/RegistrationForm";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/create" element={<CreatePage />} />
             <Route path="/note/:id" element={<DetailsPage />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </div>
       </div>
