@@ -7,6 +7,9 @@ import DetailsPage from "./pages/DetailsPage";
 import toast from "react-hot-toast";
 import Register from "./components/RegistrationForm";
 
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
 const App = () => {
   return (
     <div className="relative h-full w-full overflow-hidden ">
@@ -45,3 +48,24 @@ const App = () => {
 };
 
 export default App;
+
+export const config = defineConfig({
+  plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Split vendor code into separate chunks
+          "vendor-react": ["react", "react-dom"],
+          "vendor-router": ["react-router-dom"],
+          "vendor-axios": ["axios"],
+        },
+        // Adjust chunk size warning limit
+        chunkSizeWarningLimit: 1000,
+      },
+    },
+    // Enable code splitting
+    minify: "esbuild",
+    chunks: true,
+  },
+});
