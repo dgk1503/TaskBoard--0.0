@@ -4,7 +4,6 @@ import {
   deleteNotes,
   getAllNotes,
   updateNotes,
-  getNotebyId,
 } from "../controllers/notesControllers.js";
 import { protect } from "../../middleware/JWTVerification.js";
 const noterouter = express.Router();

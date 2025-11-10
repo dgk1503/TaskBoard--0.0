@@ -1,5 +1,5 @@
 import note from "../../models/Note.js";
-import note from "../../models/Note.js";
+
 //get all
 export const getAllNotes = async (_, res) => {
   try {
@@ -39,21 +39,17 @@ export const updateNotes = async (req, res) => {
     const note = await note.findOne({ _id: req.params.id, user: req.user._id });
 
     if (!note) {
-      return res
-        .status(401)
-        .json({
-          success: false,
-          message: "Not authorized to upadte this note",
-        });
+      return res.status(401).json({
+        success: false,
+        message: "Not authorized to upadte this note",
+      });
     }
 
     if (note.user.toString() !== req.user._id.toString()) {
-      return res
-        .status(401)
-        .json({
-          success: false,
-          message: "Not authorized to update this note",
-        });
+      return res.status(401).json({
+        success: false,
+        message: "Not authorized to update this note",
+      });
     }
 
     const updatedNote = await note.findByIdAndUpdate(
@@ -78,12 +74,10 @@ export const deleteNotes = async (req, res) => {
         .json({ success: false, message: "Note not found" });
     }
     if (note.user.toString() !== req.user._id.toString()) {
-      return res
-        .status(401)
-        .json({
-          success: false,
-          message: "Not authorized to delete this note",
-        });
+      return res.status(401).json({
+        success: false,
+        message: "Not authorized to delete this note",
+      });
     }
 
     await note.deleteOne();
