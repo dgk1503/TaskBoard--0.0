@@ -1,5 +1,6 @@
-import nodemailer from "nodemailer";
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
+import * as nodemailer from "nodemailer";
+
 dotenv.config();
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -11,15 +12,13 @@ const transporter = nodemailer.createTransport({
 
 export const sendVerificationEmail = async (email, otp) => {
   const mailOptions = {
-    from: PROCESS.env.EMAIL_USER,
+    from: process.env.EMAIL_USER,
     to: email,
     subject: "Verify Your Taskboard Account",
     html: `
            <h1>Welcome to Taskboard Sergeant !<h1/>
            <p>Your verification code is: <strong>${otp}</strong></p>
            <p>You have 10 minutes until this OTP Expires !</p>
-        
-        
         `,
   };
   return transporter.sendMail(mailOptions);

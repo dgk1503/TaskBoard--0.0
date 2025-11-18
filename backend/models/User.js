@@ -11,6 +11,6 @@ const userschema = mongoose.Schema({
   resetOtpExpireAt: { type: Number, default: 0 },
 });
 
-const userModel = mongoose.models.user || mongoose.model("User", userschema);
+const userModel = mongoose.model("User", userschema);
 
 export default userModel;

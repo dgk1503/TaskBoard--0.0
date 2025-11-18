@@ -1,6 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
-import { register } from "../../../backend/src/controllers/authController";
+import api from "../lib/axios";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +8,7 @@ const Register = () => {
     password: "",
   });
 
-  cosnt[(MessageChannel, setMessage)] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -19,13 +18,13 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDeafult();
+    e.preventDefault();
     try {
-      const response = await axios.post("/api/auth/register", formData);
+      const response = await api.post("/auth/register", formData);
       if (response.data.success) {
-        window.location.href = `/verify-email?email=${FormData.email}`;
+        window.location.href = `/verify-email?email=${formData.email}`;
       } else {
-        setMessage(response.data.message);
+        setMessage(response.data.message || "Registration failed");
       }
     } catch (err) {
       setMessage("Registration failed. Please try again.");

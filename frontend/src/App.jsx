@@ -1,14 +1,9 @@
-import { Route, Routes } from "react-router";
-import DotGrid from "./components/Background";
-import HomePage from "./pages/HomePage";
-import CreatePage from "./pages/CreatePage";
-import DetailsPage from "./pages/DetailsPage";
-
-import toast from "react-hot-toast";
-import Register from "./components/RegistrationForm";
-
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { Route, Routes } from "react-router-dom";
+import DotGrid from "./components/Background.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import CreatePage from "./pages/CreatePage.jsx";
+import DetailsPage from "./pages/DetailsPage.jsx";
+import Register from "./components/RegistrationForm.jsx";
 
 const App = () => {
   return (
@@ -48,24 +43,3 @@ const App = () => {
 };
 
 export default App;
-
-export const config = defineConfig({
-  plugins: [react()],
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          // Split vendor code into separate chunks
-          "vendor-react": ["react", "react-dom"],
-          "vendor-router": ["react-router-dom"],
-          "vendor-axios": ["axios"],
-        },
-        // Adjust chunk size warning limit
-        chunkSizeWarningLimit: 1000,
-      },
-    },
-    // Enable code splitting
-    minify: "esbuild",
-    chunks: true,
-  },
-});

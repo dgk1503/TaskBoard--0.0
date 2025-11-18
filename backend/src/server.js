@@ -3,22 +3,19 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import cookieParser from "cookie-parser";
-
 import notesRoutes from "./routes/notes.js";
 import { connectDB } from "./config/db.js";
 import rateLimiter from "../middleware/rateLimiter.js";
 import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 5001;
 const __dirname = path.resolve();
 
 // middleware
-if (process.env.NODE_ENV !== "production") {
-  app.use(cors());
-}
+app.use(cors());
+
 app.use(express.json());
 app.use(cookieParser());
 // this middleware will parse JSON bodies: req.body
