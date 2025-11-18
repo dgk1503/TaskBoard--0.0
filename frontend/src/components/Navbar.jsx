@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { FilePlus } from "lucide-react";
 
 const Navbar = () => {
@@ -13,6 +13,13 @@ const Navbar = () => {
             <Link to={"/create"} className="btn btn-outline ">
               <FilePlus className="w-5 h-5" />
               <span>New Task</span>
+            </Link>
+            <Link to={"/login"} className="btn btn-ghost">
+              Login
+            </Link>
+
+            <Link to={"/register"} className="btn btn-primary">
+              Register
             </Link>
           </div>
         </div>

@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage.jsx";
 import CreatePage from "./pages/CreatePage.jsx";
 import DetailsPage from "./pages/DetailsPage.jsx";
 import Register from "./components/RegistrationForm.jsx";
+import Login from "./components/Login.jsx";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/create" element={<CreatePage />} />
             <Route path="/note/:id" element={<DetailsPage />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </div>
