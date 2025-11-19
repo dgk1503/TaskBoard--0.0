@@ -20,7 +20,7 @@ const HomePage = () => {
         setRateLimit(false);
       } catch (err) {
         console.log("Error", err);
-        if (err.response.status === 429) {
+        if (err.response && err.response.status === 429) {
           setRateLimit(true);
         } else {
           toast.error("Failed to load Tasks");

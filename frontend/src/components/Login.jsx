@@ -30,7 +30,7 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl">
+    <div className="max-w-md mx-auto mt-10 p-6 backdrop-blur-sm rounded-lg ">
       <h2 className="text-2xl font-bold mb-6">Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
