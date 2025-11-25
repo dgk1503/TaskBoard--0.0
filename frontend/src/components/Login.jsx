@@ -2,7 +2,7 @@ import { useState } from "react";
 import api from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar.jsx";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });

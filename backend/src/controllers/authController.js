@@ -10,7 +10,7 @@ const generateOTP = () => {
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
 
-  if (!name | !email | !password) {
+  if (!name || !email || !password) {
     return res.json({ success: false, message: "Missing details" });
   }
 
@@ -22,15 +22,15 @@ export const register = async (req, res) => {
     }
     const hashed_pass = await bcrypt.hash(password, 20);
     const verifyOtp = generateOTP();
-    const verifyOTPat = Date.now() + 600000;
+    const verifyOtpExpireAt = Date.now() + 600000; // 10 minutes
 
     const user = new userModel({
       name,
       email,
       password: hashed_pass,
       verifyOtp,
-      verifyOTPat,
-      isAcountVerified: false,
+      verifyOtpExpireAt,
+      isAccountVerified: false,
     });
 
     await user.save();
@@ -115,29 +115,32 @@ export const verifyEmail = async (req, res) => {
   const { email, otp } = req.body;
 
   try {
-    const user = await userModel.find({ email });
+    const user = await userModel.findOne({ email });
 
     if (!user) {
       return res.json({ success: false, message: "User not found." });
     }
 
-    if (user.verifyOtp !== otp) {
+    if (String(user.verifyOtp) !== String(otp)) {
       return res.json({
         success: false,
-        message: "Invalid Verification code.",
+        message: "Invalid verification code.",
       });
     }
 
-    if (Date.now() > verifyOTPat) {
+    if (
+      !user.verifyOtpExpireAt ||
+      Date.now() > Number(user.verifyOtpExpireAt)
+    ) {
       return res.json({
         success: false,
         message: "Verification code expired.",
       });
     }
 
-    user.isAcountVerified = true;
+    user.isAccountVerified = true;
     user.verifyOtp = "";
-    user.verifyOTPat = 0;
+    user.verifyOtpExpireAt = 0;
     await user.save();
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -151,10 +154,7 @@ export const verifyEmail = async (req, res) => {
       maxAge: 604800000,
     });
 
-    return res.json({
-      success: true,
-      message: "Email Verification comeplete !",
-    });
+    return res.json({ success: true, message: "Email verification complete." });
   } catch (err) {
     return res.json({ success: false, message: err.message });
   }
@@ -167,7 +167,8 @@ export const getMe = async (req, res) => {
         .status(401)
         .json({ success: false, message: "Not authenticated" });
     // ensure password isn't sent
-    const { password, verifyOtp, verifyOTPat, ...safeUser } = req.user.toObject
+    const { password, verifyOtp, verifyOtpExpireAt, ...safeUser } = req.user
+      .toObject
       ? req.user.toObject()
       : req.user;
     return res.json({ success: true, user: safeUser });

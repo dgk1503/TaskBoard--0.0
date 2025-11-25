@@ -1,8 +1,9 @@
 import axios from "axios";
 
 // in production, there's no localhost so we have to make this dynamic
+// Point to backend API in development (backend default port is 5001)
 const BASE_URL =
-  import.meta.env.MODE === "development" ? "http://localhost:3000/api" : "/api";
+  import.meta.env.MODE === "development" ? "http://localhost:5001/api" : "/api";
 
 const api = axios.create({
   baseURL: BASE_URL,

@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage.jsx";
 import CreatePage from "./pages/CreatePage.jsx";
 import DetailsPage from "./pages/DetailsPage.jsx";
 import Register from "./components/RegistrationForm.jsx";
+import VerifyEmail from "./pages/VerifyEmail.jsx";
 import Login from "./components/Login.jsx";
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/create" element={<CreatePage />} />
             <Route path="/note/:id" element={<DetailsPage />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </div>

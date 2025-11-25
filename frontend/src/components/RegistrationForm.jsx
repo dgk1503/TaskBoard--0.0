@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../lib/axios";
 import Navbar from "./Navbar";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
+    
   });
 
   const [message, setMessage] = useState("");
@@ -23,7 +26,8 @@ const Register = () => {
     try {
       const response = await api.post("/auth/register", formData);
       if (response.data.success) {
-        window.location.href = `/verify-email?email=${formData.email}`;
+        // navigate to verify page with email as query param (SPA navigation)
+        navigate(`/verify-email?email=${encodeURIComponent(formData.email)}`);
       } else {
         setMessage(response.data.message || "Registration failed");
       }
@@ -72,6 +76,7 @@ const Register = () => {
               required
             />
           </div>
+          
           <button
             type="submit"
             className="w-full bg-blue-500 text-white p-2 rounded transition ease-in-out duration-300 hover:bg-blue-600"
