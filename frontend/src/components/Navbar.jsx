@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
-import { FilePlus } from "lucide-react";
+import { FilePlus, HomeIcon } from "lucide-react";
 
 const Navbar = () => {
   return (
     <header className="bg-transparent backdrop-blur-sm border-b border-base-content/10 ">
       <div className="mx-auto max-w-6xl p-4 backdrop-blur-3xl">
         <div className="flex items-center justify-between">
+          <Link
+            className="w-5 h-5 transition ease-in-out duration-300 hover:scale-120"
+            to={"/"}
+          >
+            <HomeIcon />
+          </Link>
           <h1 className="text-3xl  font-mono font-bold text-primary tracking-tight ">
             TaskBoard
           </h1>

@@ -83,6 +83,14 @@ export const login = async (req, res) => {
       expiresIn: "7d",
     });
 
+    // set cookie so frontend can use it for authenticated requests
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      maxAge: 604800000,
+    });
+
     return res.json({ success: true });
   } catch (err) {
     res.json({ success: false, message: "Log in error " });
@@ -149,5 +157,21 @@ export const verifyEmail = async (req, res) => {
     });
   } catch (err) {
     return res.json({ success: false, message: err.message });
+  }
+};
+
+export const getMe = async (req, res) => {
+  try {
+    if (!req.user)
+      return res
+        .status(401)
+        .json({ success: false, message: "Not authenticated" });
+    // ensure password isn't sent
+    const { password, verifyOtp, verifyOTPat, ...safeUser } = req.user.toObject
+      ? req.user.toObject()
+      : req.user;
+    return res.json({ success: true, user: safeUser });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
   }
 };
